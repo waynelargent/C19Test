@@ -7,9 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using C19Test.Data;
 using C19Test.Models;
-using Microsoft.EntityFrameworkCore.Storage;
 
-namespace C19Test.Pages.Cases
+namespace C19Test.Pages.Locations
 {
     public class IndexModel : PageModel
     {
@@ -20,14 +19,11 @@ namespace C19Test.Pages.Cases
             _context = context;
         }
 
-        public IList<Case> Case { get;set; }
-        
+        public IList<Location> Location { get;set; }
+
         public async Task OnGetAsync()
         {
-            Case = await _context.Cases.
-                         Include(b => b.Status).
-                         Include(c => c.Location).
-                         ToListAsync();
-;        }
+            Location = await _context.Location.ToListAsync();
+        }
     }
 }

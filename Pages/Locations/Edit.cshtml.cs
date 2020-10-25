@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using C19Test.Data;
 using C19Test.Models;
 
-namespace C19Test.Pages.Cases
+namespace C19Test.Pages.Locations
 {
     public class EditModel : PageModel
     {
@@ -21,20 +21,18 @@ namespace C19Test.Pages.Cases
         }
 
         [BindProperty]
-        public Case Case { get; set; }
-        public IList<Status> StatusSL { get; set; }
-        public IList<Location> LocationSL { get; set; }
+        public Location Location { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            StatusSL = await _context.Status.ToListAsync();
-            LocationSL = await _context.Location.ToListAsync();
-            Case = await _context.Cases.FirstOrDefaultAsync(m => m.CaseID == id);
-            
-            if (Case == null)
+
+            Location = await _context.Location.FirstOrDefaultAsync(m => m.LocationID == id);
+
+            if (Location == null)
             {
                 return NotFound();
             }
@@ -50,7 +48,7 @@ namespace C19Test.Pages.Cases
                 return Page();
             }
 
-            _context.Attach(Case).State = EntityState.Modified;
+            _context.Attach(Location).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +56,7 @@ namespace C19Test.Pages.Cases
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CaseExists(Case.CaseID))
+                if (!LocationExists(Location.LocationID))
                 {
                     return NotFound();
                 }
@@ -71,9 +69,9 @@ namespace C19Test.Pages.Cases
             return RedirectToPage("./Index");
         }
 
-        private bool CaseExists(int id)
+        private bool LocationExists(int id)
         {
-            return _context.Cases.Any(e => e.CaseID == id);
+            return _context.Location.Any(e => e.LocationID == id);
         }
     }
 }

@@ -34,16 +34,26 @@
                 <span asp-validation-for="Case.ExposureDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Case.StatusID" class="control-label"></label>
-                <select asp-for="Case.StatusID" class="form-control">
-                    <option value="">-- Select Status --</option>
-                    @foreach (var item in Model.StatusSL)
+                <label asp-for="Case.LocationID" class="control-label"></label>
+                <select asp-for="Case.LocationID" class="form-control">
+                    <option value="">-- Select Location --</option>
+                    @foreach (var item in Model.LocationSL)
                     {
-                        <option value="@item.StatusID">@item.Description</option>
+                        <option value="@item.LocationID">@item.LocationDescription</option>
                     }
                 </select>
-                <!-- <input asp-for="Case.StatusID" class="form-control" />
-    <span asp-validation-for="Case.StatusID" class="text-danger"></span>  -->
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    <label asp-for="Case.StatusID" class="control-label"></label>
+                    <select asp-for="Case.StatusID" class="form-control">
+                        <option value="">-- Select Status --</option>
+                        @foreach (var item in Model.StatusSL)
+                        {
+                            <option value="@item.StatusID">@item.Description</option>
+                        }
+                    </select>
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

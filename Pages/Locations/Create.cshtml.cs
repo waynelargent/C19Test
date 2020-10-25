@@ -7,9 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using C19Test.Data;
 using C19Test.Models;
-using Microsoft.EntityFrameworkCore;
 
-namespace C19Test.Pages.Cases
+namespace C19Test.Pages.Locations
 {
     public class CreateModel : PageModel
     {
@@ -19,17 +18,14 @@ namespace C19Test.Pages.Cases
         {
             _context = context;
         }
-        public IList<Status> StatusSL { get; set; }
-        public IList<Location> LocationSL { get; set; }
-        public async Task<PageResult> OnGetAsync()
+
+        public IActionResult OnGet()
         {
-            StatusSL = await _context.Status.ToListAsync();
-            LocationSL = await _context.Location.ToListAsync();
             return Page();
         }
 
         [BindProperty]
-        public Case Case { get; set; }
+        public Location Location { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -40,7 +36,7 @@ namespace C19Test.Pages.Cases
                 return Page();
             }
 
-            _context.Cases.Add(Case);
+            _context.Location.Add(Location);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

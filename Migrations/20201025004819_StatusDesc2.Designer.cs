@@ -4,14 +4,16 @@ using C19Test.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace C19Test.Migrations
 {
     [DbContext(typeof(C19TestContext))]
-    partial class C19TestContextModelSnapshot : ModelSnapshot
+    [Migration("20201025004819_StatusDesc2")]
+    partial class StatusDesc2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,9 +41,6 @@ namespace C19Test.Migrations
                         .HasColumnType("nvarchar(60)")
                         .HasMaxLength(60);
 
-                    b.Property<int>("LocationID")
-                        .HasColumnType("int");
-
                     b.Property<string>("SNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(10)")
@@ -52,28 +51,9 @@ namespace C19Test.Migrations
 
                     b.HasKey("CaseID");
 
-                    b.HasIndex("LocationID");
-
                     b.HasIndex("StatusID");
 
                     b.ToTable("Cases");
-                });
-
-            modelBuilder.Entity("C19Test.Models.Location", b =>
-                {
-                    b.Property<int>("LocationID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("LocationDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.HasKey("LocationID");
-
-                    b.ToTable("Location");
                 });
 
             modelBuilder.Entity("C19Test.Models.Status", b =>
@@ -95,12 +75,6 @@ namespace C19Test.Migrations
 
             modelBuilder.Entity("C19Test.Models.Case", b =>
                 {
-                    b.HasOne("C19Test.Models.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("C19Test.Models.Status", "Status")
                         .WithMany()
                         .HasForeignKey("StatusID")

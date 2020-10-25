@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.CodeAnalysis;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -28,5 +29,11 @@ namespace C19Test.Models
 
         [Required]
         public int StatusID { get; set; }
+        [Required]
+        public int LocationID { get; set; }
+
+        // navigation properties to get fireign key data
+        public Status Status { get; set; }
+        public Location Location { get; set; }
     }
 }

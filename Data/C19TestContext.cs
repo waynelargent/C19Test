@@ -17,5 +17,7 @@ namespace C19Test.Data
         public DbSet<C19Test.Models.Case> Cases { get; set; }
 
         public DbSet<C19Test.Models.Status> Status { get; set; }
+
+        public DbSet<C19Test.Models.Location> Location { get; set; }
     }
 }

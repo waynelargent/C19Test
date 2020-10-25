@@ -28,6 +28,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Case[0].StatusID)
             </th>
+            <th>
+                Location
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -47,7 +50,10 @@
                 @Html.DisplayFor(modelItem => item.ExposureDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StatusID)
+                @Html.DisplayFor(modelItem => item.Status.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.LocationDescription)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.CaseID">Edit</a> |
